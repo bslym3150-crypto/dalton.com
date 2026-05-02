@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عصابة DALTON</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0b0b; color: white; overflow-x: hidden;
+        }
+
+        /* الخلفية الرئيسية */
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('main_bg.jpg');
+            background-size: cover; background-position: center; z-index: -1;
+        }
+
+        /* شاشة الترحيب (Intro) */
+        #intro-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; justify-content: center; align-items: center;
+            z-index: 100; transition: opacity 1.5s ease;
+        }
+        #intro-screen h1 {
+            font-size: 50px; text-transform: uppercase; letter-spacing: 5px;
+            animation: fadeOutText 3s forwards;
+        }
+        @keyframes fadeOutText {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.1); }
+        }
+
+        /* القائمة الرئيسية */
+        .container {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; min-height: 100vh; text-align: center;
+            opacity: 0; animation: fadeIn 2s forwards; animation-delay: 3s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* حاوية الشعارات الدائرية والشفافة */
+        .logos-row {
+            display: flex; gap: 30px; margin-bottom: 30px; align-items: center;
+        }
+        .circular-logo {
+            width: 150px; height: 150px;
+            object-fit: cover;
+            border-radius: 50%; /* لجعلها دائرية */
+            opacity: 0.6; /* شفافية */
+            border: 3px solid rgba(138, 43, 226, 0.5);
+            transition: 0.4s;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.3));
+        }
+        .circular-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            border-color: #8a2be2;
+        }
+
+        .menu-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            padding: 18px 35px; font-size: 20px; font-weight: bold;
+            color: white; background: rgba(74, 35, 122, 0.7);
+            border: 2px solid #8a2be2; border-radius: 50px; cursor: pointer;
+            transition: 0.4s; text-decoration: none; min-width: 220px;
+        }
+        .btn:hover { background: #8a2be2; transform: scale(1.05); box-shadow: 0 0 15px #8a2be2; }
+
+        /* الصفحات الداخلية */
+        .page { display: none; padding: 50px 20px; max-width: 900px; margin: auto; }
+        .active-page { display: block; animation: slideUp 0.8s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .back-btn { margin-bottom: 30px; display: inline-block; color: #8a2be2; text-decoration: none; font-weight: bold; font-size: 18px; }
+
+        .staff-card {
+            background: rgba(255,255,255,0.05); padding: 20px; margin: 10px;
+            border-radius: 15px; border-right: 5px solid #8a2be2; display: flex; justify-content: space-between;
+            backdrop-filter: blur(5px);
+        }
+        .staff-rank { color: #8a2be2; font-weight: bold; }
+
+        .rule-box { background: rgba(0,0,0,0.6); padding: 18px; margin-bottom: 12px; border-radius: 10px; border-right: 4px solid #cc0000; text-align: right; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <div class="main-background"></div>
+
+    <div id="intro-screen">
+        <h1>مرحبا بك في عصابة DALTON</h1>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home" class="container">
+        <div class="logos-row">
+            <!-- شعار السيرفر دائري وشفاف -->
+            <img src="server_logo.png" class="circular-logo" alt="Server">
+            <!-- شعار دالتون دائري وشفاف -->
+            <img src="dalton_logo.png" class="circular-logo" alt="Dalton">
+        </div>
+        <div class="menu-buttons">
+            <a href="#" class="btn" onclick="showPage('rules')">قراءة القوانين</a>
+            <a href="#" class="btn" onclick="showPage('staff')">مسؤولين العصابة</a>
+        </div>
+    </div>
+
+    <!-- صفحة القوانين -->
+    <div id="rules" class="page">
+        <a href="#" class="back-btn" onclick="showPage('home')">⬅ العودة للرئيسية</a>
+        <h2 style="color: #ff0000; font-size: 35px; margin-bottom: 30px;">⚠️ ميثاق القوانين الرسمي</h2>
+        <div class="rule-box">١. احترام مسؤولي العصابة واجب؛ مخالفتهم تعرضك للإنذار الأول.</div>
+        <div class="rule-box">٢. عند وصولك إلى (٣) إنذارات، سيتم طردك فوراً من العصابة.</div>
+        <div class="rule-box">٣. في حال تم "تدبيلك" في الراديو وقت المداهمة، سيتم محاسبتك.</div>
+        <div class="rule-box">٤. يمنع القيام بأي مداهمة دون إذن مسبق؛ المخالفة تعني الفصل.</div>
+        <div class="rule-box">٥. خيانة العصابة أو تسريب المعلومات = فصل + بلاك ليست نهائي.</div>
+        <div class="rule-box">٦. التعاون مع العسكريين أو الأعداء = بلاك ليست + فصل مباشر.</div>
+        <div class="rule-box">٧. عدم الالتزام بقوانين السرقة في السيرفر الأساسي = طرد.</div>
+    </div>
+
+    <!-- صفحة المسؤولين -->
+    <div id="staff" class="page">
+        <a href="#" class="back-btn" onclick="showPage('home')">⬅ العودة للرئيسية</a>
+        <h2 style="font-size: 35px; margin-bottom: 30px;">👑 إدارة عصابة دالتون</h2>
+        <div class="staff-card"><span>_l3ep</span> <span class="staff-rank">BOSS</span></div>
+        <div class="staff-card"><span>pqfy9</span> <span class="staff-rank">Co BOSS</span></div>
+        <div class="staff-card"><span>asd702._67157</span> <span class="staff-rank">Manager</span></div>
+        <div class="staff-card"><span>qjizn</span> <span class="staff-rank">Co Manager</span></div>
+        <div class="staff-card"><span>tamim__0073</span> <span class="staff-rank">Co Manager</span></div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('intro-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+            }, 1500);
+        }, 3000);
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page, .container').forEach(p => {
+                p.style.display = 'none';
+                p.classList.remove('active-page');
+            });
+            
+            if(pageId === 'home') {
+                document.getElementById('home').style.display = 'flex';
+                document.getElementById('home').classList.add('active-page');
+            } else {
+                document.getElementById(pageId).style.display = 'block';
+                document.getElementById(pageId).classList.add('active-page');
+            }
+        }
+    </script>
+</body>
+</html>
